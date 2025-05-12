@@ -1,0 +1,67 @@
+<div class="auth-container">
+  <!-- Left Side -->
+  <div class="auth-info">
+     <div class="app-title">
+      <img src="../../../favicon.ico" alt="Expensia Logo" class="logo">
+      <h1>Expensia</h1>
+    </div>
+    <h3>Your Personal Expense Tracker Application</h3>
+    <p>
+      Track your expenses, manage categories, and visualize your spending habits with our easy-to-use expense tracker.
+    </p>
+
+    <div class="feature-list">
+      <div class="feature-item">
+        <div class="icon">✓</div>
+        <div class="text">
+          <strong>Track Expenses</strong><br />
+          <span>Easily add and manage your daily expenses</span>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="icon">✓</div>
+        <div class="text">
+          <strong>Visualize Spending</strong><br />
+          <span>See where your money goes with intuitive charts</span>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="icon">✓</div>
+        <div class="text">
+          <strong>Category Management</strong><br />
+          <span>Organize expenses with customizable categories</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Side -->
+  <div class="auth-form animate-up">
+    <h2>Welcome to <strong>ExpenseTrack</strong></h2>
+    <p>Sign in to your account or create a new one to start tracking your expenses</p>
+
+    <div class="tab-switch">
+      <button [class.active]="isLoginMode" (click)="isLoginMode = true">Login</button>
+      <button [class.active]="!isLoginMode" (click)="isLoginMode = false">Register</button>
+    </div>
+
+    <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+      <!-- Show name field only in register mode -->
+  <div *ngIf="!isLoginMode">
+    <label>Your Name</label>
+    <input type="text" formControlName="name" placeholder="Enter your name" required />
+  </div>
+      <label>Email</label>
+      <input type="email" formControlName="email" placeholder="Enter your email" required />
+
+      <label>Password</label>
+      <input type="password" formControlName="password" placeholder="Enter your password" required />
+
+      <button type="submit">{{ isLoginMode ? 'Log In' : 'Register' }}</button>
+    </form>
+
+    <p class="terms" *ngIf="!isLoginMode">
+      By signing up, you agree to our Terms of Service and Privacy Policy.
+    </p>
+  </div>
+</div>

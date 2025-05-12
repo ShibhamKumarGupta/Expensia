@@ -1,0 +1,169 @@
+<!-- Top Navbar -->
+<div class="navbar">
+  <div class="nav-left" (click)="navigateTo('home')">
+    <img src="../../../favicon.ico" alt="Logo" class="logo">
+    <div class="app-name">Expensia</div>
+  </div>
+  <!-- Add this hamburger div -->
+  <div class="hamburger" (click)="toggleNavbar()">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  
+  <div class="nav-right" [class.active]="isNavbarOpen">
+    <a class="active" (click)="navigateTo('home')">Home</a>
+     <a (click)="navigateTo('analytics')">Analytics</a>
+  <a (click)="navigateTo('addExpense')">Add Expense</a>
+  <a (click)="navigateTo('yourExpenses')">Your Expense</a>
+  <a (click)="toggleProfileModal()">Profile</a>
+    <button><a href="/" class="logout-link">Logout <fa-icon [icon]="['fas', 'door-open']"></fa-icon></a></button>
+  </div>
+</div>
+
+<!-- Main Dashboard Content -->
+<div class="dashboard-container" id="home">
+  <div class="dashboard-header">
+    <h1>Welcome to <span class="highlight">ExpenseTracker</span></h1>
+    <p>Here’s your spending summary</p>
+  </div>
+
+  <div class="dashboard-summary-cards">
+    <div class="summary-card"><h3>Total</h3><p>₹{{ total }}</p></div>
+    <div class="summary-card"><h3>This Week</h3><p>₹{{ weeklyTotal }}</p></div>
+    <div class="summary-card"><h3>This Month</h3><p>₹{{ monthlyTotal }}</p></div>
+  </div>
+
+  <!-- Charts -->
+  <div class="reports-section" *ngIf="expenses.length > 0" #analyticsSection>
+    <h2>Expense Analytics</h2>
+    <div class="charts-row">
+      <div class="chart-container">
+        <canvas baseChart [data]="chartData" [type]="chartType" [options]="chartOptions"></canvas>
+      </div>
+      <div class="chart-container">
+        <canvas baseChart [data]="barChartData" [type]="barChartType" [options]="barChartOptions"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Expense -->
+  <div class="expense-form-section card" #addExpenseSection>
+    <h2>Add New Expense</h2>
+    <form [formGroup]="expenseForm" (ngSubmit)="onAdd()">
+      <div><label>Name</label><input type="text" placeholder="Expense Name" formControlName="name" required /></div>
+      <div><label>Amount</label><input type="number" placeholder="Amount" formControlName="amount" required /></div>
+      <div><label>Date</label><input type="date" formControlName="date" required /></div>
+      <div>
+        <label>Category</label>
+        <select formControlName="category" required>
+          <option value="">Select</option>
+          <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+        </select>
+      </div>
+      <button type="submit">Add Expense</button>
+    </form>
+  </div>
+
+  <!-- Expenses List -->
+  <div class="expense-table-section card" #yourExpensesSection>
+    <h2>Your Expenses</h2>
+    <table class="expense-table">
+      <thead>
+        <tr><th>Name</th><th>Amount</th><th>Category</th><th>Date</th><th>Actions</th></tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let expense of expenses">
+          <td>{{ expense.name }}</td>
+          <td>₹{{ expense.amount }}</td>
+          <td>{{ expense.category }}</td>
+          <td>{{ expense.date | date }}</td>
+          <td>
+            <button class="action-btn edit-btn" (click)="openEditModal(expense)">Edit <fa-icon [icon]="['fas', 'pen']"></fa-icon></button>
+            <button class="action-btn" (click)="onDelete(expense.id)">Delete <fa-icon [icon]="['fas', 'trash']"></fa-icon></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h2>Expensia</h2>
+        <p>Track your expenses and visualize your spending in real-time.</p>
+      </div>
+      <div class="footer-links">
+        <div class="link-group">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a (click)="navigateTo('addExpense')">Add Expense</a></li>
+            <li><a (click)="navigateTo('yourExpenses')">Your Expenses</a></li>
+            <li><a (click)="navigateTo('analytics')">Analytics</a></li>
+          </ul>
+        </div>
+        <div class="link-group">
+          <h4>Support</h4>
+          <ul>
+            <li><a>Help Center</a></li>
+            <li><a>Privacy Policy</a></li>
+            <li><a>Terms</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Expensia. All rights reserved.</p>
+      <p>Made with ❤️ by Arindam Dey and Shibham Gupta</p>
+    </div>
+  </footer>
+</div>
+
+<!-- Edit Modal -->
+  <div class="modal" [class.active]="showModal">
+    <div class="modal-content">
+      <span class="close-btn" (click)="closeModal()">&times;</span>
+      <h2>Edit Expense</h2>
+      <form [formGroup]="editForm" (ngSubmit)="onEditSubmit()">
+        <input type="text" formControlName="name" placeholder="Name" required />
+        <input type="number" formControlName="amount" placeholder="Amount" required />
+        <input type="date" formControlName="date" required />
+        <select formControlName="category" required>
+          <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+        </select>
+        <button type="submit">Update</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal" [class.active]="showProfileModal">
+  <div class="modal-content">
+    <span class="close-btn" (click)="toggleProfileModal()">&times;</span>
+    <h2>Your Profile</h2>
+    
+    <div class="profile-info" *ngIf="userProfile">
+      <div class="profile-field">
+        <label>Name:</label>
+        <p>{{ userProfile.name }}</p>
+      </div>
+      
+      <div class="profile-field">
+        <label>Email:</label>
+        <p>{{ userProfile.email }}</p>
+      </div>
+      
+      <div class="profile-field">
+        <label>Member Since:</label>
+        <p>{{ registrationDate }}</p>
+      </div>
+      
+      <div class="profile-stats">
+        <div class="profile-field">
+          <label>Total Expenses till now:</label>
+          <p>₹{{ total }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
