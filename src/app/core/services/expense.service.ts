@@ -40,7 +40,6 @@ export class ExpenseService {
     return deleteDoc(docRef);
   }
 
-  // Updated method using the new modular API
   updateExpense(id: string, expense: Partial<Expense>): Promise<void> {
     const docRef = doc(this.firestore, 'expenses', id);
     return updateDoc(docRef, expense);

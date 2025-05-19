@@ -129,7 +129,7 @@
 }
 
 .tab-switch button.active {
-  background-color: #00bcd4; /* Cyan */
+  background-color: #00bcd4;
   color: white;
 }
 
@@ -162,7 +162,7 @@
   padding: 14px;
   font-size: 16px;
   font-weight: 600;
-  background-color: #00bcd4; /* Cyan */
+  background-color: #00bcd4; 
   color: white;
   border: none;
   border-radius: 6px;
@@ -171,7 +171,7 @@
 }
 
 .auth-form button[type="submit"]:hover {
-  background-color: #009eb3; /* Darker cyan */
+  background-color: #009eb3; 
 }
 
 .terms {
@@ -196,9 +196,7 @@
   margin: 0; 
   line-height: 1; 
 }
-/* Add these to your existing auth.component.css */
 
-/* Fix form container height and scrolling */
 .auth-form {
   max-height: 100vh;
   overflow-y: auto;
@@ -207,7 +205,6 @@
   flex-direction: column;
 }
 
-/* Remove extra gaps in the form */
 .auth-form form {
   gap: 0;
   margin-bottom: 0;
@@ -216,28 +213,23 @@
   flex-grow: 1;
 }
 
-/* Adjust input spacing */
 .auth-form input {
   margin-bottom: 10px;
 }
 
-/* Fix the submit button position */
 .auth-form button[type="submit"] {
   margin-top: 10px;
 }
 
-/* Better terms text positioning */
 .terms {
   margin-top: 15px;
   margin-bottom: 5px;
 }
 
-/* Improve tab switch spacing */
 .tab-switch {
   margin-bottom: 15px;
 }
 
-/* Scrollbar styling */
 .auth-form::-webkit-scrollbar {
   width: 5px;
 }
@@ -247,7 +239,6 @@
   border-radius: 10px;
 }
 
-/* Responsive adjustments */
 @media (max-width: 992px) {
   .auth-form {
     max-height: none;
@@ -270,7 +261,6 @@
   }
 }
 
-/* Responsive Media Queries */
 @media (max-width: 1200px) {
   .auth-info {
     padding: 60px 40px;

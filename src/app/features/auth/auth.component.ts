@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../core/services/auth.service';
-import { log } from 'console';
 
 @Component({
   selector: 'app-auth',
@@ -25,8 +24,8 @@ export class AuthComponent implements OnInit {
   ngOnInit(): void {
     this.authForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],  // Added password length validation
-      name: ['']  // initially optional
+      password: ['', [Validators.required, Validators.minLength(8)]], 
+      name: [''] 
     });
   }
 
@@ -46,7 +45,6 @@ export class AuthComponent implements OnInit {
   onSubmit(): void {
     const { email, password, name } = this.authForm.value;
   
-    // Simple password length check for registration
   if (!this.isLoginMode && password.length < 8) {
     alert('Password must be at least 8 characters long');
     return;

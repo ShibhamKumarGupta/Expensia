@@ -15,18 +15,18 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
   selector: 'app-dashboard',
   standalone: true,
   imports: [
-    CommonModule,        // For *ngFor and date pipe
-    ReactiveFormsModule, // For formGroup
+    CommonModule,       
+    ReactiveFormsModule, 
     DatePipe,
     NgChartsModule,
-    FaIconComponent            // For date formatting
+    FaIconComponent           
   ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
    isNavbarOpen = false;
-  // Add these ViewChild references
+ 
   @ViewChild('analyticsSection') analyticsSection!: ElementRef;
   @ViewChild('addExpenseSection') addExpenseSection!: ElementRef;
   @ViewChild('yourExpensesSection') yourExpensesSection!: ElementRef;
@@ -59,11 +59,9 @@ showProfileModal = false;
   this.isNavbarOpen = !this.isNavbarOpen;
 }
 
-  // Add this method to load user profile data
  loadUserProfile(): void {
     this.authService.getCurrentUser().subscribe(async (user: User | null) => {
       if (user) {
-        // Get user document from Firestore
         const userDoc = await getDoc(doc(this.firestore, 'users', user.uid));
         
         this.userProfile = {
@@ -72,7 +70,6 @@ showProfileModal = false;
           registrationDate: user.metadata.creationTime
         };
         
-        // Format registration date
         if (user.metadata.creationTime) {
           this.registrationDate = new Date(user.metadata.creationTime).toLocaleDateString();
         }
@@ -80,7 +77,6 @@ showProfileModal = false;
     });
   }
 
-  // Add this method to toggle profile modal
   toggleProfileModal(): void {
     this.showProfileModal = !this.showProfileModal;
     if (this.showProfileModal) {
@@ -90,7 +86,6 @@ showProfileModal = false;
 
 
    navigateTo(section: string): void {
-    // Wait for Angular to update the view if needed
     setTimeout(() => {
       const element = this.getSectionElement(section);
       if (element) {
@@ -255,7 +250,7 @@ showProfileModal = false;
     }
   };
   
-  public chartType: ChartType = 'pie'; // Can change to 'pie' or 'line'
+  public chartType: ChartType = 'pie'; 
   public barChartType: ChartType = 'bar';
 
   public barChartData: ChartConfiguration['data'] = {
@@ -274,7 +269,6 @@ public barChartOptions: ChartConfiguration['options'] = {
   }
 };
   
-  // Add this new method INSIDE your class:
   private updateChart(expenses: any[]): void {
     const categoryTotals = new Map<string, number>();
     
@@ -283,7 +277,6 @@ public barChartOptions: ChartConfiguration['options'] = {
       categoryTotals.set(expense.category, current + expense.amount);
     });
   
-    // Update both charts
     this.chartData = {
       ...this.chartData,
       labels: Array.from(categoryTotals.keys()),

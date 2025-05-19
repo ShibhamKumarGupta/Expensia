@@ -1,6 +1,4 @@
 
-
-/* Global Reset & Base */
 * {
   margin: 0;
   padding: 0;
@@ -182,7 +180,6 @@ html {
   background-color: var(--primary-color);
 }
 
-/* Modified for stretch layout */
 .expense-form-section form {
   display: flex;
   flex-wrap: wrap;
@@ -290,7 +287,7 @@ html {
   text-transform: uppercase;
   font-size: 0.85rem;
   letter-spacing: 0.5px;
-  width: 20%; /* Equal width for all 5 columns */
+  width: 20%;
 }
 
 .expense-table th:first-child {
@@ -305,8 +302,8 @@ html {
   padding: 1rem;
   border-bottom: 1px solid #eee;
   vertical-align: middle;
-  width: 20%; /* Equal width for all 5 columns */
-  text-align: left; /* Default alignment */
+  width: 20%; 
+  text-align: left; 
 }
 
 .expense-table tr:last-child td {
@@ -339,7 +336,6 @@ html {
   margin-right: 2rem;
 }
 
-/* Charts Section - Improved Version */
 .reports-section {
   margin: 2rem 0;
   padding: 0 1rem;
@@ -380,20 +376,20 @@ html {
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative; /* Needed for no-data positioning */
+  position: relative; 
 }
-/* Chart canvas container - maintains aspect ratio */
+
 .chart-wrapper {
   width: 100%;
   position: relative;
-  min-height: 300px; /* Minimum height */
+  min-height: 300px; 
 }
 
-/* Ensure both charts have consistent sizing */
+
 .chart-container canvas {
   width: 100% !important;
   height: auto !important;
-  aspect-ratio: 1.5; /* Ideal aspect ratio for bar charts (wider than tall) */
+  aspect-ratio: 1.5; 
   max-width: 100%;
   max-height: 400px;
 }
@@ -405,7 +401,7 @@ html {
   font-weight: 600;
 }
 .pie-chart canvas {
-  aspect-ratio: 1; /* Perfect circle for pie chart */
+  aspect-ratio: 1;
 }
 
 .no-data {
@@ -542,7 +538,7 @@ html {
     left: 50%;
     transform: translate(-50%, -50%);
     animation: modalFadeIn 0.3s ease-out;
-    z-index: 1051; /* Higher than modal's z-index */
+    z-index: 1051; 
   }
 
 .modal.active {
@@ -633,7 +629,14 @@ html {
   transition: var(--transition);
   background: none;
   border: none;
-  padding: 0.5rem;
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  z-index: 1;
 }
 
 /* Edit Button Styles */
@@ -767,11 +770,9 @@ html {
   color: var(--primary-color);
 }
 
-/* ================== RESPONSIVE STYLES ================== */
 
-/* Medium devices (tablets, 768px and down) */
 @media (max-width: 768px) {
-  /* Navbar adjustments */
+
   .navbar {
     padding: 0.75rem 1rem;
     flex-wrap: wrap;
@@ -799,13 +800,14 @@ html {
   }
 
   .nav-right a {
-    color: white;
+    color: black;
     padding: 0.5rem 1rem;
   }
 
   .nav-right button {
     width: 100%;
     margin-top: 0.5rem;
+    background-color: white;
   }
 
   /* Add hamburger menu */
@@ -868,7 +870,7 @@ html {
   }
 }
 
-/* Small devices (phones, 576px and down) */
+
 @media (max-width: 576px) {
   /* Dashboard header */
   .dashboard-header {
@@ -915,9 +917,9 @@ html {
   }
 }
 
-/* Extra small adjustments */
+
 @media (max-width: 400px) {
-  /* Expense table - make more compact */
+ 
   .expense-table th,
   .expense-table td {
     padding: 0.5rem;
@@ -937,7 +939,6 @@ html {
   }
 }
 
-/* Table responsive behavior */
 @media (max-width: 768px) {
   .expense-table-container {
     overflow-x: auto;
@@ -993,7 +994,6 @@ html {
   }
 }
 
-/* For very small screens, use minimal margin */
 @media (max-width: 576px) {
   .expense-form-section, 
   .expense-table-section {
@@ -1001,12 +1001,11 @@ html {
     margin-right: 0.5rem;
   }
 }
-/* Add this to your existing dashboard.component.css */
-/* Responsive table styles - keeps category visible */
+
 @media (max-width: 992px) {
-  .expense-table th:nth-child(4),  /* Date column */
+  .expense-table th:nth-child(4), 
   .expense-table td:nth-child(4) {
-    display: none; /* Only hide date column on medium screens */
+    display: none; 
   }
 }
 
@@ -1039,10 +1038,9 @@ html {
     font-size: 0.8rem;
   }
   
-  /* Category column adjustments */
   .expense-table th:nth-child(3),
   .expense-table td:nth-child(3) {
-    max-width: 80px; /* Limit category column width */
+    max-width: 80px; 
     overflow: hidden;
     text-overflow: ellipsis;
   }
@@ -1054,7 +1052,6 @@ html {
 }
 
 @media (max-width: 400px) {
-  /* Name column adjustments */
   .expense-table th:nth-child(1),
   .expense-table td:nth-child(1) {
     max-width: 80px;
@@ -1063,7 +1060,6 @@ html {
     white-space: nowrap;
   }
   
-  /* Action buttons stack vertically */
   .expense-table td:last-child {
     display: flex;
     flex-direction: column;
@@ -1073,5 +1069,42 @@ html {
   .action-btn {
     width: 100%;
     margin-right: 0 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .action-btn {
+    padding: 0.3rem !important;
+    min-width: 32px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .chart-container {
+    min-height: 300px;
+  }
+  
+  .chart-container:first-child {
+    aspect-ratio: 1;
+  }
+  
+  .chart-container:first-child canvas {
+    aspect-ratio: 1 !important;
+    max-width: 100%;
+    max-height: 280px;
+    width: 100% !important;
+    height: auto !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .chart-container:first-child canvas {
+    max-height: 250px;
+  }
+  
+  .charts-row {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 }
