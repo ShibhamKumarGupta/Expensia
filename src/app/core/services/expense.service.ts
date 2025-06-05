@@ -8,7 +8,7 @@ import {
   doc,
   query,
   where,
-  updateDoc  // Add this import
+  updateDoc
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Expense } from '../models/expense.model';

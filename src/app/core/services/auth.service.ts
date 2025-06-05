@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, User } from '@angular/fire/auth';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { doc, setDoc } from '@angular/fire/firestore';
+import { doc, setDoc, updateDoc } from '@angular/fire/firestore';
 import { Firestore } from '@angular/fire/firestore';
 
 
@@ -31,11 +31,11 @@ export class AuthService {
     const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
     const user = userCredential.user;
     
-    // Store user profile in Firestore
     await setDoc(doc(this.firestore, 'users', user.uid), {
       name: name,
       email: email,
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
+       profilePicture: null
     });
     
     await this.router.navigate(['/dashboard']);
@@ -45,4 +45,16 @@ export class AuthService {
     await signOut(this.auth);
     await this.router.navigate(['/login']);
   }
+   async updateProfilePicture(userId: string, imageData: string): Promise<void> {
+    await updateDoc(doc(this.firestore, 'users', userId), {
+      profilePicture: imageData
+    });
+  }
+
+  async deleteProfilePicture(userId: string): Promise<void> {
+    await updateDoc(doc(this.firestore, 'users', userId), {
+      profilePicture: null
+    });
+  }
+  
 }

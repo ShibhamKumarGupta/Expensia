@@ -1,4 +1,6 @@
 
+
+/* Global Reset & Base */
 * {
   margin: 0;
   padding: 0;
@@ -129,7 +131,7 @@ html {
   background-color: var(--white);
   padding: 1.75rem;
   border-radius: var(--border-radius);
-  box-shadow: 2px 2px 2px 2px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   text-align: center;
   transition: var(--transition);
   position: relative;
@@ -180,6 +182,7 @@ html {
   background-color: var(--primary-color);
 }
 
+/* Modified for stretch layout */
 .expense-form-section form {
   display: flex;
   flex-wrap: wrap;
@@ -287,7 +290,7 @@ html {
   text-transform: uppercase;
   font-size: 0.85rem;
   letter-spacing: 0.5px;
-  width: 20%;
+  width: 20%; /* Equal width for all 5 columns */
 }
 
 .expense-table th:first-child {
@@ -302,8 +305,8 @@ html {
   padding: 1rem;
   border-bottom: 1px solid #eee;
   vertical-align: middle;
-  width: 20%; 
-  text-align: left; 
+  width: 20%; /* Equal width for all 5 columns */
+  text-align: left; /* Default alignment */
 }
 
 .expense-table tr:last-child td {
@@ -336,6 +339,7 @@ html {
   margin-right: 2rem;
 }
 
+/* Charts Section - Improved Version */
 .reports-section {
   margin: 2rem 0;
   padding: 0 1rem;
@@ -376,20 +380,20 @@ html {
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative; 
+  position: relative; /* Needed for no-data positioning */
 }
-
+/* Chart canvas container - maintains aspect ratio */
 .chart-wrapper {
   width: 100%;
   position: relative;
-  min-height: 300px; 
+  min-height: 300px; /* Minimum height */
 }
 
-
+/* Ensure both charts have consistent sizing */
 .chart-container canvas {
   width: 100% !important;
   height: auto !important;
-  aspect-ratio: 1.5; 
+  aspect-ratio: 1.5; /* Ideal aspect ratio for bar charts (wider than tall) */
   max-width: 100%;
   max-height: 400px;
 }
@@ -401,7 +405,7 @@ html {
   font-weight: 600;
 }
 .pie-chart canvas {
-  aspect-ratio: 1;
+  aspect-ratio: 1; /* Perfect circle for pie chart */
 }
 
 .no-data {
@@ -538,7 +542,7 @@ html {
     left: 50%;
     transform: translate(-50%, -50%);
     animation: modalFadeIn 0.3s ease-out;
-    z-index: 1051; 
+    z-index: 1051; /* Higher than modal's z-index */
   }
 
 .modal.active {
@@ -636,7 +640,7 @@ html {
   align-items: center;
   justify-content: center;
   line-height: 1;
-  z-index: 1;
+  z-index: 1; /* Add this to ensure it stays above content */
 }
 
 /* Edit Button Styles */
@@ -770,9 +774,11 @@ html {
   color: var(--primary-color);
 }
 
+/* ================== RESPONSIVE STYLES ================== */
 
+/* Medium devices (tablets, 768px and down) */
 @media (max-width: 768px) {
-
+  /* Navbar adjustments */
   .navbar {
     padding: 0.75rem 1rem;
     flex-wrap: wrap;
@@ -870,7 +876,7 @@ html {
   }
 }
 
-
+/* Small devices (phones, 576px and down) */
 @media (max-width: 576px) {
   /* Dashboard header */
   .dashboard-header {
@@ -917,9 +923,8 @@ html {
   }
 }
 
-
+/* Extra small adjustments */
 @media (max-width: 400px) {
- 
   .expense-table th,
   .expense-table td {
     padding: 0.5rem;
@@ -939,6 +944,7 @@ html {
   }
 }
 
+/* Table responsive behavior */
 @media (max-width: 768px) {
   .expense-table-container {
     overflow-x: auto;
@@ -1038,6 +1044,7 @@ html {
     font-size: 0.8rem;
   }
   
+  /* Category column adjustments */
   .expense-table th:nth-child(3),
   .expense-table td:nth-child(3) {
     max-width: 80px; 
@@ -1052,6 +1059,7 @@ html {
 }
 
 @media (max-width: 400px) {
+  /* Name column adjustments */
   .expense-table th:nth-child(1),
   .expense-table td:nth-child(1) {
     max-width: 80px;
@@ -1082,17 +1090,18 @@ html {
 
 @media (max-width: 768px) {
   .chart-container {
-    min-height: 300px;
+    min-height: 300px; /* Ensure enough space for the chart */
   }
   
   .chart-container:first-child {
     aspect-ratio: 1;
   }
   
+  /* Ensure canvas maintains square shape */
   .chart-container:first-child canvas {
     aspect-ratio: 1 !important;
     max-width: 100%;
-    max-height: 280px;
+    max-height: 280px; 
     width: 100% !important;
     height: auto !important;
   }
@@ -1106,5 +1115,244 @@ html {
   .charts-row {
     grid-template-columns: 1fr;
     gap: 1.5rem;
+  }
+}
+
+
+/* Fix the date picker styling */
+.custom-datepicker {
+  width: 100%;
+}
+
+.custom-datepicker .mat-form-field-wrapper {
+  padding-bottom: 0; 
+}
+
+.custom-datepicker .mat-form-field-infix {
+  padding: 0.875rem 0;
+  border-top: 0; 
+}
+
+.custom-datepicker .mat-form-field-flex {
+  background-color: #f9f9f9; 
+  border: 1px solid #e0e0e0; 
+  border-radius: var(--border-radius); 
+  padding: 0 0.875rem; 
+}
+
+.custom-datepicker .mat-form-field-underline {
+  display: none; 
+}
+
+/* Date picker toggle button */
+.custom-datepicker .mat-datepicker-toggle {
+  color: #666; 
+}
+
+/* Focus state */
+.custom-datepicker .mat-form-field.mat-focused .mat-form-field-flex {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(0, 188, 212, 0.2);
+  background-color: white;
+}
+
+/* Make the date input text match other inputs */
+.custom-datepicker input {
+  font-size: 1rem !important;
+  color: #333 !important;
+}
+
+/* Adjust the datepicker popup */
+.mat-datepicker-content {
+  border-radius: var(--border-radius) !important;
+  box-shadow: var(--box-shadow) !important;
+}
+
+
+@media (max-width: 768px) {
+  .custom-datepicker .mat-form-field-flex {
+    padding: 0 0.5rem;
+  }
+  
+  .custom-datepicker .mat-form-field-infix {
+    padding: 0.75rem 0;
+  }
+}
+
+/* Remove outline appearance and match your other inputs */
+.custom-datepicker .mat-form-field-outline {
+  display: none !important;
+}
+
+/* Make the date field container match your other inputs */
+.custom-datepicker .mat-form-field-flex {
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: var(--border-radius);
+  padding: 0 0.875rem;
+  height: 48px; /* Match your other input heights */
+  align-items: center;
+}
+
+/* Input text styling */
+.custom-datepicker input {
+  font-size: 1rem;
+  color: #333;
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove extra spacing */
+.custom-datepicker .mat-form-field-infix {
+  padding: 0;
+  border-top: 0;
+  width: auto;
+}
+
+/* Toggle button styling */
+.custom-datepicker .mat-datepicker-toggle {
+  color: #666;
+  position: relative;
+  top: 1px; /* Small adjustment for visual alignment */
+}
+
+/* Focus state */
+.custom-datepicker .mat-form-field.mat-focused .mat-form-field-flex {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(0, 188, 212, 0.2);
+  background-color: white;
+}
+
+/* Placeholder text */
+.custom-datepicker .mat-input-element::placeholder {
+  color: #999;
+  opacity: 1;
+}
+
+.profile-picture-container {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.profile-picture {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 1.5rem;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid var(--primary-light);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.delete-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: rgba(255, 0, 0, 0.7);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.delete-btn:hover {
+  background-color: rgba(255, 0, 0, 0.9);
+  transform: scale(1.1);
+}
+
+.upload-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.upload-btn, .save-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.upload-btn {
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+}
+
+.save-btn {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.save-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.upload-btn:hover, .save-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.upload-progress {
+  width: 100%;
+  background-color: #f0f0f0;
+  border-radius: var(--border-radius);
+  margin-bottom: 1rem;
+  position: relative;
+  height: 24px;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: var(--primary-color);
+  border-radius: var(--border-radius);
+  transition: width 0.3s ease;
+}
+
+.upload-progress span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bold;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.upload-error {
+  color: #d32f2f;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .profile-picture {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .upload-controls {
+    flex-direction: column;
+    align-items: center;
   }
 }

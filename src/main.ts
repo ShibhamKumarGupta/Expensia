@@ -10,11 +10,12 @@ import { importProvidersFrom } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { environment } from './environments/environment';
-
+import { provideStorage, getStorage } from '@angular/fire/storage';
 // Add these Font Awesome imports
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faPen, faTrash, faDoorOpen } from '@fortawesome/free-solid-svg-icons'; // <-- NEW ICONS
+
 
 // Initialize Font Awesome icons
 function initializeFontAwesome(library: FaIconLibrary) {
@@ -32,7 +33,10 @@ bootstrapApplication(AppComponent, {
     importProvidersFrom(
       ReactiveFormsModule,
       CommonModule,
-      FontAwesomeModule // Add FontAwesomeModule
+      FontAwesomeModule,
+      ReactiveFormsModule,
+  CommonModule,
+  FontAwesomeModule,
     ),
     // Register FaIconLibrary with icons
     {
@@ -45,6 +49,7 @@ bootstrapApplication(AppComponent, {
     },
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore())
+    provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage())
   ]
 }).catch(err => console.error(err));
