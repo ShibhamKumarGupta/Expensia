@@ -93,13 +93,13 @@
         />
       </div>
       <div>
-        <label>Date</label>
+        <label>Date (mm-dd-yyyy)</label>
         <mat-form-field appearance="outline" class="custom-datepicker">
           <input
             matInput
             [matDatepicker]="picker"
             formControlName="date"
-            placeholder="Select date"
+            placeholder="mm-dd-yyyy"
           />
           <mat-datepicker-toggle
             matSuffix
@@ -217,62 +217,83 @@
   <div class="modal-content">
     <span class="close-btn" (click)="toggleProfileModal()">&times;</span>
     <h2>Your Profile</h2>
-    
+
     <div class="profile-picture-container">
       <!-- Profile picture display -->
-      <div class="profile-picture" *ngIf="userProfile?.profilePicture || previewUrl">
-        <img [src]="previewUrl || ('data:image/jpeg;base64,' + userProfile?.profilePicture)" 
-             alt="Profile Picture" class="profile-img">
+      <div
+        class="profile-picture"
+        *ngIf="userProfile?.profilePicture || previewUrl"
+      >
+        <img
+          [src]="
+            previewUrl ||
+            'data:image/jpeg;base64,' + userProfile?.profilePicture
+          "
+          alt="Profile Picture"
+          class="profile-img"
+        />
         <button class="delete-btn" (click)="deleteProfilePicture()">
           <fa-icon [icon]="['fas', 'trash']"></fa-icon>
         </button>
       </div>
-      
+
       <!-- Upload controls -->
       <div class="upload-controls">
         <div class="file-upload">
           <label for="profileUpload" class="upload-btn">
-            <fa-icon [icon]="['fas', 'upload']"></fa-icon> 
-            {{ (userProfile?.profilePicture || previewUrl) ? 'Change Image' : 'Choose Image' }}
+            <fa-icon [icon]="['fas', 'upload']"></fa-icon>
+            {{
+              userProfile?.profilePicture || previewUrl
+                ? "Change Image"
+                : "Choose Image"
+            }}
           </label>
-          <input id="profileUpload" type="file" accept="image/*" 
-                 (change)="onFileSelected($event)" style="display: none;">
+          <input
+            id="profileUpload"
+            type="file"
+            accept="image/*"
+            (change)="onFileSelected($event)"
+            style="display: none"
+          />
         </div>
-        
-        <button class="save-btn" (click)="uploadProfilePicture()" 
-                [disabled]="!selectedFile || isUploading">
+
+        <button
+          class="save-btn"
+          (click)="uploadProfilePicture()"
+          [disabled]="!selectedFile || isUploading"
+        >
           <fa-icon [icon]="['fas', 'save']"></fa-icon> Save
         </button>
       </div>
-      
+
       <!-- Upload progress -->
       <div class="upload-progress" *ngIf="isUploading">
         <div class="progress-bar" [style.width.%]="uploadProgress"></div>
         <span>{{ uploadProgress }}%</span>
       </div>
-      
+
       <!-- Upload error -->
       <div class="upload-error" *ngIf="uploadError">
         {{ uploadError }}
       </div>
     </div>
-    
+
     <div class="profile-info" *ngIf="userProfile">
       <div class="profile-field">
         <label>Name:</label>
         <p>{{ userProfile.name }}</p>
       </div>
-      
+
       <div class="profile-field">
         <label>Email:</label>
         <p>{{ userProfile.email }}</p>
       </div>
-      
+
       <div class="profile-field">
         <label>Member Since:</label>
         <p>{{ registrationDate }}</p>
       </div>
-      
+
       <div class="profile-stats">
         <div class="profile-field">
           <label>Total Expenses till now:</label>

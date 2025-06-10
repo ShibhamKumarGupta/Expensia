@@ -41,7 +41,7 @@ import { MatButtonModule } from '@angular/material/button';
 export class DashboardComponent implements OnInit {
   expenseDate: Date = new Date();
    isNavbarOpen = false;
-  // Add these ViewChild references
+  // these ViewChild references
   @ViewChild('analyticsSection') analyticsSection!: ElementRef;
   @ViewChild('addExpenseSection') addExpenseSection!: ElementRef;
   @ViewChild('yourExpensesSection') yourExpensesSection!: ElementRef;
@@ -192,8 +192,7 @@ async deleteProfilePicture(): Promise<void> {
 }
 
 
-  // Add this method to load user profile data
-  loadUserProfile(): void {
+ loadUserProfile(): void {
   this.authService.getCurrentUser().subscribe(async (user: User | null) => {
     if (user) {
       // Get user document from Firestore
@@ -206,9 +205,14 @@ async deleteProfilePicture(): Promise<void> {
         profilePicture: userDoc.exists() ? userDoc.data()['profilePicture'] : null
       };
       
-      // Format registration date
+      // Format registration date as "Month Day, Year" (e.g., "June 12, 2025")
       if (user.metadata.creationTime) {
-        this.registrationDate = new Date(user.metadata.creationTime).toLocaleDateString();
+        const date = new Date(user.metadata.creationTime);
+        this.registrationDate = date.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
       }
       
       // Set preview if profile picture exists
@@ -357,6 +361,7 @@ async deleteProfilePicture(): Promise<void> {
       };
       
       this.expenseService.addExpense(expense).then(() => {
+        alert("New Expense Added Successfully");
         this.expenseForm.reset({
           date: new Date().toISOString().split('T')[0]
         });
@@ -365,6 +370,7 @@ async deleteProfilePicture(): Promise<void> {
   }
 
   onDelete(id: string): void {
+    alert("Expense Deleted!!")
     this.expenseService.deleteExpense(id).then(() => {
       this.loadExpenses();
     });
