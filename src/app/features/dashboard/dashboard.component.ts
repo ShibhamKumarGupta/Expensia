@@ -22,8 +22,8 @@ import { MatButtonModule } from '@angular/material/button';
   selector: 'app-dashboard',
   standalone: true,
   imports: [
-    CommonModule,        // For *ngFor and date pipe
-    ReactiveFormsModule, // For formGroup
+    CommonModule,        
+    ReactiveFormsModule, 
     DatePipe,
     NgChartsModule,
     FaIconComponent,
@@ -41,7 +41,7 @@ import { MatButtonModule } from '@angular/material/button';
 export class DashboardComponent implements OnInit {
   expenseDate: Date = new Date();
    isNavbarOpen = false;
-  // these ViewChild references
+
   @ViewChild('analyticsSection') analyticsSection!: ElementRef;
   @ViewChild('addExpenseSection') addExpenseSection!: ElementRef;
   @ViewChild('yourExpensesSection') yourExpensesSection!: ElementRef;
@@ -90,14 +90,12 @@ async onFileSelected(event: any): Promise<void> {
   this.uploadError = null;
   this.selectedFile = file;
 
-  // Create preview
   const reader = new FileReader();
   reader.onload = (e: any) => {
     this.previewUrl = e.target.result;
   };
   reader.readAsDataURL(file);
 
-  // Simulate upload progress
   const interval = setInterval(() => {
     this.uploadProgress += 10;
     if (this.uploadProgress >= 100) {
@@ -110,24 +108,20 @@ async onFileSelected(event: any): Promise<void> {
 async uploadProfilePicture(): Promise<void> {
   if (!this.selectedFile || !this.userId) return;
 
-  // Reset states
   this.uploadError = null;
   this.isUploading = true;
   this.uploadProgress = 0;
 
   try {
-    // File size validation (example: 500KB max)
     if (this.selectedFile.size > 500 * 1024) {
       throw new Error('Image size should be less than 500KB');
     }
 
-    // Step 1: Read file (25% progress)
+ 
     const base64Image = await this.readFileWithProgress();
     
-    // Step 2: Upload to Firestore (25% to 100% progress)
     await this.uploadToFirestore(base64Image);
     
-    // Complete
     this.uploadProgress = 100;
     await this.loadUserProfile();
     
@@ -143,7 +137,6 @@ private async readFileWithProgress(): Promise<string> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     
-    // Update progress during file read
     reader.onprogress = (event) => {
       if (event.lengthComputable) {
         this.uploadProgress = Math.min(25, (event.loaded / event.total) * 25);
@@ -151,7 +144,7 @@ private async readFileWithProgress(): Promise<string> {
     };
     
     reader.onload = (e: any) => {
-      this.uploadProgress = 25; // Ensure we reach 25% when done
+      this.uploadProgress = 25; 
       resolve(e.target.result.split(',')[1]);
     };
     
@@ -164,16 +157,14 @@ private async readFileWithProgress(): Promise<string> {
 }
 
 private async uploadToFirestore(imageData: string): Promise<void> {
-  // Simulate progressive upload (in real app, you might have actual chunks)
   const steps = 10;
-  const stepProgress = 75 / steps; // Remaining 75% over 10 steps
+  const stepProgress = 75 / steps;
     
   for (let i = 1; i <= steps; i++) {
-    await new Promise(resolve => setTimeout(resolve, 100)); // Small delay
+    await new Promise(resolve => setTimeout(resolve, 100)); 
     this.uploadProgress = 25 + (i * stepProgress);
   }
   
-  // Actual Firestore update
   await this.authService.updateProfilePicture(this.userId, imageData);
   this.uploadProgress = 100;
 }
@@ -195,7 +186,7 @@ async deleteProfilePicture(): Promise<void> {
  loadUserProfile(): void {
   this.authService.getCurrentUser().subscribe(async (user: User | null) => {
     if (user) {
-      // Get user document from Firestore
+    
       const userDoc = await getDoc(doc(this.firestore, 'users', user.uid));
       
       this.userProfile = {
@@ -205,7 +196,6 @@ async deleteProfilePicture(): Promise<void> {
         profilePicture: userDoc.exists() ? userDoc.data()['profilePicture'] : null
       };
       
-      // Format registration date as "Month Day, Year" (e.g., "June 12, 2025")
       if (user.metadata.creationTime) {
         const date = new Date(user.metadata.creationTime);
         this.registrationDate = date.toLocaleDateString('en-US', {
@@ -215,7 +205,6 @@ async deleteProfilePicture(): Promise<void> {
         });
       }
       
-      // Set preview if profile picture exists
       if (this.userProfile.profilePicture) {
         this.previewUrl = `data:image/jpeg;base64,${this.userProfile.profilePicture}`;
       }
@@ -223,7 +212,6 @@ async deleteProfilePicture(): Promise<void> {
   });
 }
 
-  // Add this method to toggle profile modal
   toggleProfileModal(): void {
     this.showProfileModal = !this.showProfileModal;
     if (this.showProfileModal) {
@@ -328,7 +316,7 @@ async deleteProfilePicture(): Promise<void> {
 
   loadExpenses(): void {
   this.expenseService.getExpenses(this.userId).subscribe((data: any[]) => {
-    // Sort expenses by date in descending order (newest first)
+    
     this.expenses = data.sort((a, b) => {
       return new Date(b.date).getTime() - new Date(a.date).getTime();
     });

@@ -1,6 +1,4 @@
 
-
-/* Global Reset & Base */
 * {
   margin: 0;
   padding: 0;
@@ -38,7 +36,6 @@ html {
   transform: translateY(-2px);
 }
 
-/* Highlight active section */
 :target {
   animation: highlight 1.5s ease;
 }
@@ -65,7 +62,6 @@ html {
   }
 }
 
-/* Header Section */
 .dashboard-header {
   background-color: #00bcd4;
   color: var(--white);
@@ -109,14 +105,12 @@ html {
   position: relative;
 }
 
-/* Logout Button */
 .logout-section {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 1.5rem;
 }
 
-/* Summary Cards */
 .dashboard-summary-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -154,7 +148,6 @@ html {
   color: var(--primary-dark);
 }
 
-/* Expense Form Section */
 .expense-form-section {
   background-color: var(--white);
   margin: 2.5rem 0;
@@ -182,7 +175,6 @@ html {
   background-color: var(--primary-color);
 }
 
-/* Modified for stretch layout */
 .expense-form-section form {
   display: flex;
   flex-wrap: wrap;
@@ -244,8 +236,6 @@ html {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-
-/* Expense Table Section */
 .expense-table-section {
   background-color: var(--white);
   margin: 3rem 0;
@@ -290,7 +280,7 @@ html {
   text-transform: uppercase;
   font-size: 0.85rem;
   letter-spacing: 0.5px;
-  width: 20%; /* Equal width for all 5 columns */
+  width: 20%;
 }
 
 .expense-table th:first-child {
@@ -305,8 +295,8 @@ html {
   padding: 1rem;
   border-bottom: 1px solid #eee;
   vertical-align: middle;
-  width: 20%; /* Equal width for all 5 columns */
-  text-align: left; /* Default alignment */
+  width: 20%; 
+  text-align: left;
 }
 
 .expense-table tr:last-child td {
@@ -321,18 +311,17 @@ html {
   padding: 1rem;
   border-bottom: 1px solid #eee;
   vertical-align: middle;
-  width: auto; /* Changed from fixed 20% */
+  width: auto;
   text-align: left;
-  min-width: 80px; /* Add minimum width */
+  min-width: 80px; 
 }
 
-/* Give more space to name column */
+
 .expense-table th:nth-child(1),
 .expense-table td:nth-child(1) {
   min-width: 150px;
 }
 
-/* Make action column fit its content */
 .expense-table th:last-child,
 .expense-table td:last-child {
   width: auto;
@@ -361,7 +350,6 @@ html {
   margin-right: 2rem;
 }
 
-/* Charts Section - Improved Version */
 .reports-section {
   margin: 2rem 0;
   padding: 0 1rem;
@@ -402,20 +390,19 @@ html {
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative; /* Needed for no-data positioning */
+  position: relative;
 }
-/* Chart canvas container - maintains aspect ratio */
+
 .chart-wrapper {
   width: 100%;
   position: relative;
-  min-height: 300px; /* Minimum height */
+  min-height: 300px;
 }
 
-/* Ensure both charts have consistent sizing */
 .chart-container canvas {
   width: 100% !important;
   height: auto !important;
-  aspect-ratio: 1.5; /* Ideal aspect ratio for bar charts (wider than tall) */
+  aspect-ratio: 1.5;
   max-width: 100%;
   max-height: 400px;
 }
@@ -427,7 +414,7 @@ html {
   font-weight: 600;
 }
 .pie-chart canvas {
-  aspect-ratio: 1; /* Perfect circle for pie chart */
+  aspect-ratio: 1;
 }
 
 .no-data {
@@ -439,7 +426,6 @@ html {
   font-style: italic;
 }
 
-/* Footer Section */
 .footer {
   background-color: #00bcd4;
   color: black;
@@ -533,7 +519,6 @@ html {
   margin-bottom: 0.5rem;
 }
 
-/* Edit Modal Styles */
 .modal {
   position: fixed;
   top: 0;
@@ -564,7 +549,7 @@ html {
     left: 50%;
     transform: translate(-50%, -50%);
     animation: modalFadeIn 0.3s ease-out;
-    z-index: 1051; /* Higher than modal's z-index */
+    z-index: 1051;
   }
 
 .modal.active {
@@ -662,10 +647,9 @@ html {
   align-items: center;
   justify-content: center;
   line-height: 1;
-  z-index: 1; /* Add this to ensure it stays above content */
+  z-index: 1; 
 }
 
-/* Edit Button Styles */
 .edit-btn {
   background-color: var(--primary-color) !important;
   margin-right: 0.5rem;
@@ -679,7 +663,6 @@ html {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* NAVBAR STYLING */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -796,11 +779,9 @@ html {
   color: var(--primary-color);
 }
 
-/* ================== RESPONSIVE STYLES ================== */
 
-/* Medium devices (tablets, 768px and down) */
 @media (max-width: 768px) {
-  /* Navbar adjustments */
+ 
   .navbar {
     padding: 0.75rem 1rem;
     flex-wrap: wrap;
@@ -838,7 +819,6 @@ html {
     background-color: white;
   }
 
-  /* Add hamburger menu */
   .hamburger {
     display: flex;
     flex-direction: column;
@@ -855,7 +835,6 @@ html {
     transition: all 0.3s ease;
   }
 
-  /* Dashboard header */
   .dashboard-header {
     padding: 1.5rem;
   }
@@ -864,23 +843,19 @@ html {
     font-size: 1.8rem;
   }
 
-  /* Summary cards */
   .dashboard-summary-cards {
     grid-template-columns: 1fr;
     padding: 1rem;
   }
 
-  /* Expense form */
   .expense-form-section form > div {
     flex: 1 1 100%;
   }
 
-  /* Charts */
   .charts-row {
     grid-template-columns: 1fr;
   }
 
-  /* Expense table */
   .expense-table {
     min-width: 100%;
   }
@@ -891,16 +866,13 @@ html {
     font-size: 0.9rem;
   }
 
-  /* Footer */
   .footer-top {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
 }
 
-/* Small devices (phones, 576px and down) */
 @media (max-width: 576px) {
-  /* Dashboard header */
   .dashboard-header {
     padding: 1rem;
   }
@@ -913,7 +885,6 @@ html {
     font-size: 1rem;
   }
 
-  /* Summary cards */
   .summary-card {
     padding: 1.25rem;
   }
@@ -922,32 +893,26 @@ html {
     font-size: 1.5rem;
   }
 
-  /* Expense form */
   .expense-form-section,
   .expense-table-section {
     padding: 1.25rem;
   }
 
-  /* Charts */
   .chart-container {
     padding: 1rem;
   }
 
-  /* Modal */
   .modal-content {
     width: 95%;
     padding: 1.25rem;
   }
 
-  /* Footer */
   .footer-links {
     grid-template-columns: 1fr;
   }
 }
 
-/* Extra small adjustments */
 @media (max-width: 400px) {
-  /* Expense table - make more compact */
   .expense-table th,
   .expense-table td {
     padding: 0.5rem;
@@ -958,8 +923,6 @@ html {
     padding: 0.3rem 0.6rem !important;
     font-size: 0.8rem;
   }
-
-  /* Form inputs */
   .expense-form-section input,
   .expense-form-section select,
   .expense-form-section button {
@@ -967,7 +930,6 @@ html {
   }
 }
 
-/* Form responsive layout */
 @media (max-width: 768px) {
   .expense-form-section form {
     flex-direction: column;
@@ -979,7 +941,6 @@ html {
   }
 }
 
-/* Modal responsive adjustments */
 @media (max-width: 576px) {
   .modal-content {
     width: 95%;
@@ -991,7 +952,6 @@ html {
   }
 }
 
-/* Profile modal responsive */
 @media (max-width: 768px) {
   .profile-field {
     flex-direction: column;
@@ -1011,7 +971,6 @@ html {
   }
 }
 
-/* For very small screens, use minimal margin */
 @media (max-width: 576px) {
   .expense-form-section, 
   .expense-table-section {
@@ -1028,12 +987,12 @@ html {
   
   .expense-table th:nth-child(1),
   .expense-table td:nth-child(1) {
-    min-width: 120px; /* Give name column more space */
+    min-width: 120px;
   }
   
   .expense-table th:nth-child(3),
   .expense-table td:nth-child(3) {
-    min-width: 100px; /* Give category column fixed width */
+    min-width: 100px;
   }
   
   .action-btn {
@@ -1097,7 +1056,6 @@ html {
     padding: 0.4rem 0.2rem;
   }
   
-  /* Stack action buttons vertically on very small screens */
   .expense-table td:last-child {
     display: flex;
     flex-direction: column;
@@ -1117,23 +1075,17 @@ html {
   }
 }
 
-
-/* Add this to your existing CSS */
 @media (max-width: 768px) {
   .chart-container {
-    min-height: 300px; /* Ensure enough space for the chart */
+    min-height: 300px;
   }
-  
-  /* Specifically target the pie chart container */
   .chart-container:first-child {
-    aspect-ratio: 1; /* Force square aspect ratio */
+    aspect-ratio: 1;
   }
-  
-  /* Ensure canvas maintains square shape */
   .chart-container:first-child canvas {
     aspect-ratio: 1 !important;
     max-width: 100%;
-    max-height: 280px; /* Adjust based on your needs */
+    max-height: 280px;
     width: 100% !important;
     height: auto !important;
   }
@@ -1150,58 +1102,43 @@ html {
   }
 }
 
-
-/* Fix the date picker styling */
 .custom-datepicker {
   width: 100%;
 }
-
-/* Make the date input field match other inputs */
 .custom-datepicker .mat-form-field-wrapper {
-  padding-bottom: 0; /* Remove extra padding */
+  padding-bottom: 0;
 }
 
 .custom-datepicker .mat-form-field-infix {
-  padding: 0.875rem 0; /* Match other input paddings */
-  border-top: 0; /* Remove top border */
+  padding: 0.875rem 0; 
+  border-top: 0;
 }
-
 .custom-datepicker .mat-form-field-flex {
-  background-color: #f9f9f9; /* Match other inputs */
-  border: 1px solid #e0e0e0; /* Match other inputs */
-  border-radius: var(--border-radius); /* Match other inputs */
-  padding: 0 0.875rem; /* Add some horizontal padding */
+  background-color: #f9f9f9; 
+  border: 1px solid #e0e0e0; 
+  border-radius: var(--border-radius);
+  padding: 0 0.875rem;
 }
-
 .custom-datepicker .mat-form-field-underline {
-  display: none; /* Hide the underline */
+  display: none;
 }
-
-/* Date picker toggle button */
 .custom-datepicker .mat-datepicker-toggle {
-  color: #666; /* Match other icon colors */
+  color: #666; 
 }
-
-/* Focus state */
 .custom-datepicker .mat-form-field.mat-focused .mat-form-field-flex {
   border-color: var(--primary-color);
   box-shadow: 0 0 0 2px rgba(0, 188, 212, 0.2);
   background-color: white;
 }
-
-/* Make the date input text match other inputs */
 .custom-datepicker input {
   font-size: 1rem !important;
   color: #333 !important;
 }
-
-/* Adjust the datepicker popup */
 .mat-datepicker-content {
   border-radius: var(--border-radius) !important;
   box-shadow: var(--box-shadow) !important;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .custom-datepicker .mat-form-field-flex {
     padding: 0 0.5rem;
@@ -1212,22 +1149,17 @@ html {
   }
 }
 
-/* Remove outline appearance and match your other inputs */
 .custom-datepicker .mat-form-field-outline {
   display: none !important;
 }
-
-/* Make the date field container match your other inputs */
 .custom-datepicker .mat-form-field-flex {
   background-color: #f9f9f9;
   border: 1px solid #e0e0e0;
   border-radius: var(--border-radius);
   padding: 0 0.875rem;
-  height: 48px; /* Match your other input heights */
+  height: 48px;
   align-items: center;
 }
-
-/* Input text styling */
 .custom-datepicker input {
   font-size: 1rem;
   color: #333;
@@ -1235,35 +1167,27 @@ html {
   margin: 0;
   padding: 0;
 }
-
-/* Remove extra spacing */
 .custom-datepicker .mat-form-field-infix {
   padding: 0;
   border-top: 0;
   width: auto;
 }
-
-/* Toggle button styling */
 .custom-datepicker .mat-datepicker-toggle {
   color: #666;
   position: relative;
-  top: 1px; /* Small adjustment for visual alignment */
+  top: 1px;
 }
-
-/* Focus state */
 .custom-datepicker .mat-form-field.mat-focused .mat-form-field-flex {
   border-color: var(--primary-color);
   box-shadow: 0 0 0 2px rgba(0, 188, 212, 0.2);
   background-color: white;
 }
-
-/* Placeholder text */
 .custom-datepicker .mat-input-element::placeholder {
   color: #999;
   opacity: 1;
 }
 
-/* Profile picture styles */
+
 .profile-picture-container {
   margin-bottom: 2rem;
   text-align: center;
@@ -1379,7 +1303,6 @@ html {
   font-weight: 500;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .profile-picture {
     width: 120px;
@@ -1392,7 +1315,6 @@ html {
   }
 }
 
-/* Improved responsive table styles */
 @media (max-width: 992px) {
   .expense-table th,
   .expense-table td {
@@ -1402,12 +1324,12 @@ html {
   
   .expense-table th:nth-child(1),
   .expense-table td:nth-child(1) {
-    min-width: 120px; /* Give name column more space */
+    min-width: 120px; 
   }
   
   .expense-table th:nth-child(3),
   .expense-table td:nth-child(3) {
-    min-width: 100px; /* Give category column fixed width */
+    min-width: 100px; 
   }
   
   .action-btn {
@@ -1470,8 +1392,6 @@ html {
   .expense-table td {
     padding: 0.4rem 0.2rem;
   }
-  
-  /* Stack action buttons vertically on very small screens */
   .expense-table td:last-child {
     display: flex;
     flex-direction: column;
